@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 
-export const UserForm = ({ handleEmailChange,handlePasswordChange,registerEmail,registerPassword,register }) => {
+export const UserForm = ({ handleEmailChange,onChangeName,name,handlePasswordChange,registerEmail,registerPassword,register }) => {
+    const canSave = Boolean(name) && Boolean(registerEmail) && Boolean(registerPassword) === true
     return (
         <div className="px-32">
             <div className="flex justify-center px-20">
@@ -11,8 +12,8 @@ export const UserForm = ({ handleEmailChange,handlePasswordChange,registerEmail,
                     <div>
                         <label htmlFor="name">Your Name</label>
                         <input type="text" 
-                            // value={formState.name}
-                            // onChange={handleChange}
+                            value={name}
+                            onChange={onChangeName}
                             placeholder="name"
                             className="w-full mt-3 p-3 rounded-md bg-slate-100 focus:outline-none focus:ring focus:ring-green-400"
                         />
@@ -39,6 +40,7 @@ export const UserForm = ({ handleEmailChange,handlePasswordChange,registerEmail,
                     </div>
                     <div className="mt-9 flex justify-center">
                         <button type="submit"
+                            disabled={!canSave}
                             onClick={register}
                             className="text-white bg-green-500 hover:bg-green-400 px-10 p-3 rounded-md"
                         >
@@ -46,11 +48,6 @@ export const UserForm = ({ handleEmailChange,handlePasswordChange,registerEmail,
                         </button>
                     </div>
                 </form>
-                {/* {error && (
-                    <div className="text-center text-2xl">
-                        {error.message}
-                    </div>
-                )} */}
                 <div className="mt-6 flex items-center justify-center">
                     <p>Already have an account? </p>
                     <Link to="/login" className="text-green-500 ml-2"> Sign in</Link>
